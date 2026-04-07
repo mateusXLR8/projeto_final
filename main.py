@@ -18,15 +18,13 @@ while True:
         case 1:
             while True:   
                 nome = input("\nDigite o nome do aluno: ").title().strip()
-                try:
-                    int(nome)
-                    print("Utilize apenas letras")
+                if not nome:
+                    print("O nome não pode estar vazio!")
                     continue
-                except ValueError:
-                    if not nome:
-                        print("O nome não pode estar vazio!")
-                        continue
+                if nome.isalpha():
                     break
+                else:
+                    print("Utilize apenas letras")
             while True:        
                 nascimento = input("\nColoque a data de nascimento do aluno em formato dd/mm/aaaa: ")
                 try:
