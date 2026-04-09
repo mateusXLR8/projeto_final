@@ -21,14 +21,15 @@ while True:
                 if not nome:
                     print("O nome não pode estar vazio!")
                     continue
-                if nome.isalpha():
+                if nome.isalpha(): 
                     break
                 else:
                     print("Utilize apenas letras")
                     
             while True:        
-                nascimento = input("\nColoque a data de nascimento do aluno em formato dd/mm/aaaa: ")
+
                 try:
+                    nascimento = input("\nColoque a data de nascimento do aluno em formato dd/mm/aaaa: ")
                     idade = idade_funcao(nascimento)
                 except ValueError:
                     print("A data de nascimento deve estar no formato dd/mm/aaaa")
