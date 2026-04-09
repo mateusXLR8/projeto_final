@@ -25,6 +25,7 @@ while True:
                     break
                 else:
                     print("Utilize apenas letras")
+                    
             while True:        
                 nascimento = input("\nColoque a data de nascimento do aluno em formato dd/mm/aaaa: ")
                 try:
@@ -32,7 +33,13 @@ while True:
                 except ValueError:
                     print("A data de nascimento deve estar no formato dd/mm/aaaa")
                     continue
-                break
+        
+                if calcular_idade(nascimento):
+                    break
+                else:
+                    print('A idade deve ser maior que 12 e menor que 18')
+                    continue
+            
             while True:
                 try:
                     nota = float(input("\nColoque a nota do aluno: "))
@@ -85,19 +92,3 @@ while True:
         case _:
             print("\nNúmero invalido")
             continue
-  
-            
-
- 
-                    
-
-                
-                
-               
-                    
-            
-            
-    
-
-
-

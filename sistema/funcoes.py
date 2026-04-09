@@ -6,7 +6,7 @@ def idade_funcao(nascimento):
     idade_funcao = agora.year - nascimento_convertida.year
     if agora.month < nascimento_convertida.month:
         idade_funcao = idade_funcao - 1
-        return idade_funcao
+        return idade_funcao 
     else:
         return idade_funcao
     
@@ -61,5 +61,22 @@ def media_notas(lista_alunos):
                 
 
 
+
     
+def calcular_idade(nascimento):
+    hoje = datetime.now() 
+    nascimento_convertida = datetime.strptime(nascimento, "%d/%m/%Y") 
     
+    if nascimento_convertida > hoje: 
+        return False
+    
+    diferenca = hoje - nascimento_convertida 
+    idade_calculo = diferenca.days // 365 
+    
+    if idade_calculo > 120: 
+        return False
+    elif idade_calculo < 12 or idade_calculo > 18: 
+        return False
+    else:
+        return True 
+
