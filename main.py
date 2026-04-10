@@ -43,19 +43,21 @@ while True:
             
             while True:
                 try:
-                    nota = float(input("\nColoque a nota do aluno: "))
+                    nota1 = float(input("\nColoque a nota do aluno: "))
+                    nota2 = float(input('Digite a segunda nota: '))
+                    media = (nota1*nota2)/2
                 except ValueError:
                     print("A nota deve ser um número")
                     continue
-                if nota > 10 or nota < 0:
+                if media >= 7 or media <= 7:
                     print("A nota não pode ser maior que 10 ou negativa")
                     continue
                 break
 
 
-            aprovacao = aprovar(nota)
+            aprovacao = aprovar(media)
             cadastro = data_cadastro()
-            adicionar_aluno(nome, nascimento, idade, nota, aprovacao, cadastro, lista_alunos)
+            adicionar_aluno(nome, nascimento, idade, media, aprovacao, cadastro, lista_alunos)
             print("Aluno adicionado!")
         case 2:
             if lista_vazia(lista_alunos):
@@ -63,7 +65,7 @@ while True:
                     print(f"\nNome: {alunos['nome']}\n"
                         f"Idade: {alunos['idade']}\n"
                         f"Data de nascimento: {alunos['nascimento']}\n"
-                        f"Nota: {alunos['nota']}\n"
+                        f"Nota: {alunos['media']}\n"
                         f"Situação: {alunos['aprovacao']}\n"
                         f"Data do cadastro: {alunos['cadastro']}") 
             else:

@@ -56,7 +56,8 @@ def lista_vazia(lista_alunos):
 def media_notas(lista_alunos):
     return sum(alunos['nota'] for alunos in lista_alunos) / len(lista_alunos)
 
-
+def esta():
+    if
     
                 
 
