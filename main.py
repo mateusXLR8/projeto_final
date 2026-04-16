@@ -9,7 +9,9 @@ while True:
     2 - Listar alunos
     3 - Mostrar estatisticas
     4 - Gerar relatórios Excel
-    5 - Sair\n \n"""))
+    5 - Sair\n \n
+                    """))
+        
     except ValueError:
         print("Isso não é um número!")
         continue
