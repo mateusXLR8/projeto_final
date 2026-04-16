@@ -31,7 +31,6 @@ while True:
             while True:        
                 try:
                     nascimento = input("\nColoque a data de nascimento do aluno em formato dd/mm/aaaa: ")
-
                     idade = idade_funcao(nascimento)
                 except ValueError:
                     print("A data de nascimento deve estar no formato dd/mm/aaaa")
@@ -71,7 +70,7 @@ while True:
                     print(f"Nome: {aluno['nome']}")
                     print(f"Idade: {aluno['idade']}")
                     print(f"Nascimento: {aluno['nascimento']}")
-                    print(f"Nota: {aluno['nota']}")
+                    print(f"Média: {aluno['media']}")
                     print(f"Situação: {aluno['aprovacao']}")
                     print(f"Cadastro: {aluno['cadastro']}") 
             else:
@@ -82,7 +81,7 @@ while True:
                 print(f'\nMédia da turma:{media_notas(lista_alunos):.2f}')
 
                 melhor = melhor_aluno(lista_alunos)
-                print(f"\nMelhor aluno: {melhor['nome']} ({melhor['nota']})")
+                print(f"\nMelhor aluno: {melhor['nome']} ({melhor['media']})")
                 aprovados,reprovados = separar_aluno(lista_alunos)
                 print(f"\nAprovados:{aprovados}")
                 print(f"\nReprovados {reprovados}")
