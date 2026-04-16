@@ -56,13 +56,20 @@ def lista_vazia(lista_alunos):
 def media_notas(lista_alunos):
     return sum(alunos['nota'] for alunos in lista_alunos) / len(lista_alunos)
 
-def esta():
-    if
+def validar_nota(nota):
+    if 0 > nota > 10:
+        return False
+    else:
+        return True
     
-                
+def mensagem_nota():
+    if not validar_nota(nota):
+        print("A nota deve ser um valor de 0 a 10!")
+        return False
+    else:
+        return True
 
-
-
+    
     
 def calcular_idade(nascimento):
     hoje = datetime.now() 

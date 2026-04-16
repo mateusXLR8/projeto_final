@@ -41,18 +41,30 @@ while True:
                     print('A idade deve ser maior que 12 e menor que 18')
                     continue
             
-            while True:
-                try:
-                    nota1 = float(input("\nColoque a nota do aluno: "))
-                    nota2 = float(input('Digite a segunda nota: '))
-                    media = (nota1*nota2)/2
-                except ValueError:
-                    print("A nota deve ser um número")
-                    continue
-                if media >= 7 or media <= 7:
-                    print("A nota não pode ser maior que 10 ou negativa")
-                    continue
-                break
+            
+            try:
+                while True:
+                    nota1 = float(input("\nColoque a primeira nota do aluno: "))
+                    nota = nota1
+                    if not validar_nota(nota):
+                        print("A nota deve ser um valor de 0 a 10!")
+                        continue
+                    else:    
+                        nota2 = float(input('Coloque a segunda nota do aluno: '))
+                        nota = nota2
+                        if not mensagem_nota(validar_nota(nota)):
+                            continue
+                        break
+
+                
+
+
+
+                media = (nota1+nota2)/2
+            except ValueError:
+                print("A nota deve ser um número")
+                continue
+            
 
 
             aprovacao = aprovar(media)
