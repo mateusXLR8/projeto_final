@@ -15,54 +15,57 @@ def data_cadastro():
     return data.strftime("%d/%m/%Y")
     
 def aprovar(nota):
-    if nota < 7:
-        aprovado = "Reprovado!"
-        return aprovado
-    else:
-        aprovado = "Aprovado!"
-        return aprovado
+    return "Aprovado!" if nota >= 7 else "Reprovado!"
 
 def adicionar_aluno(nome, nascimento, idade,  nota, aprovacao, cadastro, lista_alunos):
-    alunos = {'nome' : nome, 'nascimento' : nascimento, 'idade'  : idade,
-              'nota' : nota, 'aprovacao' : aprovacao, 'cadastro' : cadastro}
-    lista_alunos.append(alunos)
+    aluno = {
+            'nome': nome,
+            'nascimento': nascimento,
+            'idade': idade,
+            'nota': nota,
+            'aprovacao': aprovacao, 
+            'cadastro': cadastro
+            }
     
-def buscar_aluno(nome, lista_alunos):
+    lista_alunos.append(aluno)   
+
+def listar_alunos(lista_alunos):
     for alunos in lista_alunos:
-        if alunos['nome'] == nome:
-            return(f"\nNome: {alunos['nome']}\n"
+            print(f"\nNome: {alunos['nome']}\n"
                 f"Idade: {alunos['idade']}\n"
                 f"Data de nascimento: {alunos['nascimento']}\n"
                 f"Nota: {alunos['nota']}\n"
                 f"Situação: {alunos['aprovacao']}\n"
                 f"Data do cadastro: {alunos['cadastro']}")
-    
-    return("\nNão encontrado\n")
             
-def excluir_aluno(nome, lista_alunos):
-    for alunos in lista_alunos:
-        if alunos['nome'] == nome:
-            lista_alunos.remove(alunos)
-            return("\nAluno removido!\n")
-    return("\nNão encontrado")
-
 def lista_vazia(lista_alunos):
     if not lista_alunos:
         return False
     else:
         return True
     
-
 def media_notas(lista_alunos):
     return sum(alunos['nota'] for alunos in lista_alunos) / len(lista_alunos)
 
-def esta():
-    if
-    
-                
+def melhor_aluno(lista_alunos):
+    melhor = lista_alunos[0]
 
+    for aluno in lista_alunos:
+        if aluno['nota'] > melhor['nota']:
+            melhor = aluno
+    return melhor
 
+def separar_aluno(lista_alunos):
+    aprovados = 0
+    reprovados = 0
 
+    for aluno in lista_alunos:
+        if aluno['nota'] >= 7: 
+            aprovados += 1 
+        else:
+            reprovados += 1 
+
+    return aprovados, reprovados
     
 def calcular_idade(nascimento):
     hoje = datetime.now() 
@@ -80,4 +83,3 @@ def calcular_idade(nascimento):
         return False
     else:
         return True 
-
