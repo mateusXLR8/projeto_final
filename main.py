@@ -47,19 +47,17 @@ while True:
                     nota1 = float(input("\nColoque a primeira nota do aluno: "))
                     nota = nota1
                     if not validar_nota(nota):
-                        print("A nota deve ser um valor de 0 a 10!")
+                        print("A nota deve estar entre 0 e 10")
                         continue
-                    else:    
-                        nota2 = float(input('Coloque a segunda nota do aluno: '))
-                        nota = nota2
-                        if not mensagem_nota(validar_nota(nota)):
-                            continue
-                        break
-
-                
-
-
-
+                    break
+                    
+                while True:
+                    nota2 = float(input("\nColoque a segunda nota: "))
+                    nota = nota2
+                    if not validar_nota(nota):
+                        print("A nota deve estar entre 0 e 10")
+                        continue
+                    break
                 media = (nota1+nota2)/2
             except ValueError:
                 print("A nota deve ser um número")
@@ -72,24 +70,12 @@ while True:
             adicionar_aluno(nome, nascimento, idade, media, aprovacao, cadastro, lista_alunos)
             print("Aluno adicionado!")
         case 2:
-            if lista_vazia(lista_alunos):
-                for alunos in lista_alunos:
-                    print(f"\nNome: {alunos['nome']}\n"
-                        f"Idade: {alunos['idade']}\n"
-                        f"Data de nascimento: {alunos['nascimento']}\n"
-                        f"Nota: {alunos['media']}\n"
-                        f"Situação: {alunos['aprovacao']}\n"
-                        f"Data do cadastro: {alunos['cadastro']}") 
-            else:
-                print("Nenhum aluno cadastrado")
+            listar_alunos(lista_alunos)
 
         case 3:
-            if lista_vazia(lista_alunos):
-                nome = input("Digite o nome do aluno: ").title().strip()  
-                print(buscar_aluno(nome, lista_alunos,))
-                continue
-            else:
-                print("Nenhum aluno cadastrado")
+            nome = input("Digite o nome do aluno: ").title().strip()  
+            buscar_aluno(lista_alunos, nome)
+
         case 4:
             if lista_vazia(lista_alunos):
                 nome = input("\nDigite o nome do aluno: ").title().strip() 

@@ -22,22 +22,38 @@ def aprovar(nota):
         aprovado = "Aprovado!"
         return aprovado
 
-def adicionar_aluno(nome, nascimento, idade,  nota, aprovacao, cadastro, lista_alunos):
+def adicionar_aluno(nome, nascimento, idade, media, aprovacao, cadastro, lista_alunos):
     alunos = {'nome' : nome, 'nascimento' : nascimento, 'idade'  : idade,
-              'nota' : nota, 'aprovacao' : aprovacao, 'cadastro' : cadastro}
+              'media' : media, 'aprovacao' : aprovacao, 'cadastro' : cadastro}
     lista_alunos.append(alunos)
+                        
+def exibir_aluno(aluno):
+    print(f"\nNome: {aluno['nome']}\n"
+          f"Idade: {aluno['idade']}\n"
+          f"Data de nascimento: {aluno['nascimento']}\n"
+          f"Média: {aluno['media']}\n"
+          f"Situação: {aluno['aprovacao']}\n"
+          f"Data do cadastro: {aluno['cadastro']}")
     
-def buscar_aluno(nome, lista_alunos):
-    for alunos in lista_alunos:
-        if alunos['nome'] == nome:
-            return(f"\nNome: {alunos['nome']}\n"
-                f"Idade: {alunos['idade']}\n"
-                f"Data de nascimento: {alunos['nascimento']}\n"
-                f"Nota: {alunos['nota']}\n"
-                f"Situação: {alunos['aprovacao']}\n"
-                f"Data do cadastro: {alunos['cadastro']}")
     
-    return("\nNão encontrado\n")
+def buscar_aluno(lista_alunos, nome_busca):
+    for aluno in lista_alunos:
+        if aluno['nome'].title().strip()  == nome_busca.title().strip(): 
+            exibir_aluno(aluno)
+            return
+    print("Aluno não encontrado.")
+
+
+
+    
+def listar_alunos(lista_alunos):
+    if not lista_vazia(lista_alunos):
+        print("Nenhum aluno cadastrado.")
+        return
+    
+    for aluno in lista_alunos:
+        exibir_aluno(aluno)
+    
             
 def excluir_aluno(nome, lista_alunos):
     for alunos in lista_alunos:
@@ -57,17 +73,10 @@ def media_notas(lista_alunos):
     return sum(alunos['nota'] for alunos in lista_alunos) / len(lista_alunos)
 
 def validar_nota(nota):
-    if 0 > nota > 10:
-        return False
-    else:
-        return True
+    return 0 <= nota <= 10
     
 def mensagem_nota():
-    if not validar_nota(nota):
-        print("A nota deve ser um valor de 0 a 10!")
-        return False
-    else:
-        return True
+    return "A nota deve estar entre 0 e 10!"
 
     
     
@@ -87,4 +96,7 @@ def calcular_idade(nascimento):
         return False
     else:
         return True 
+    
+
+
 
