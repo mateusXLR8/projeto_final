@@ -42,19 +42,29 @@ while True:
                     print('A idade deve ser maior que 12 e menor que 18')
                     continue  
 
-            while True:
-                try:
+            
+            try:
+                while True:
                     nota1 = float(input("\nDigite a primeira nota: ")) 
+                    nota = nota1
+                    if not validar_nota(nota):
+                        print("A nota não pode ser maior que 10 ou negativa")
+                        continue
+                    else:
+                        break
+                while True:       
                     nota2 = float(input("Digite a segunda nota: "))
-                except ValueError:
-                    print("Digite apenas números.")
-                    continue
-
-                if not (0 <= nota1 <= 10) or not (0 <= nota2 <= 10 )  :
-                    print("A nota não pode ser maior que 10 ou negativa")
-                    continue
-                media = (nota1 + nota2) / 2
-                break
+                    nota = nota2
+                    if not validar_nota(nota):
+                        print('A nota não pode ser maior que 10 ou negativa')
+                        continue
+                    else:
+                        break
+            except ValueError:
+                print("Digite apenas números.")
+                continue
+            media = (nota1 + nota2) / 2
+            
 
             aprovacao = aprovar(media)
             cadastro = data_cadastro()
@@ -63,18 +73,7 @@ while True:
 
 
         case 2:
-            if lista_vazia(lista_alunos):
-                print('\n =====LISTA DOS ALUNOS======')
-                for i,aluno in enumerate(lista_alunos,start = 1):
-                    print(f"\nAluno {i}")
-                    print(f"Nome: {aluno['nome']}")
-                    print(f"Idade: {aluno['idade']}")
-                    print(f"Nascimento: {aluno['nascimento']}")
-                    print(f"Média: {aluno['media']}")
-                    print(f"Situação: {aluno['aprovacao']}")
-                    print(f"Cadastro: {aluno['cadastro']}") 
-            else:
-                print("Nenhum aluno cadastrado")
+            listar_alunos(lista_alunos)
 
         case 3:
             if lista_vazia(lista_alunos):
@@ -90,6 +89,7 @@ while True:
                 print('Nenhum aluno(a) consta como cadastrado.')
               
         case 4:
+            
             print('Função Excel ainda não consta.')
         case 5:
             print("\nFechando programa...\n")

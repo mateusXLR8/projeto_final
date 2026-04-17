@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from openpyxl import Workbook
 
 def idade_funcao(nascimento):
     agora = datetime.now()
@@ -25,14 +26,12 @@ def adicionar_aluno(nome, nascimento, idade, media, aprovacao, cadastro, lista_a
 def exibir_aluno(aluno):
     print(f"\nNome: {aluno['nome']}\n"
           f"Idade: {aluno['idade']}\n"
-          f"Data de nascimento: {aluno['nascimento']}\n"
           f"Média: {aluno['media']}\n"
-          f"Situação: {aluno['aprovacao']}\n"
-          f"Data do cadastro: {aluno['cadastro']}")
+          f"Situação: {aluno['aprovacao']}\n")
         
 def buscar_aluno(lista_alunos, nome_busca):
     for aluno in lista_alunos:
-        if aluno['nome'].title().strip()  == nome_busca.title().strip(): 
+        if aluno['nome'].title().strip() == nome_busca.title().strip(): 
             exibir_aluno(aluno)
             return
     print("Aluno não encontrado.")
@@ -91,3 +90,13 @@ def calcular_idade(nascimento):
     else:
         return True 
 
+def validar_nota(nota):
+    return 0 <= nota <= 10
+
+def salvar_excel(lista_alunos):
+    arquivo = Workbook()
+    planilha = arquivo.active
+    planilha.title = 'ALUNOS'
+    planilha.append(['NOME', 'NOTA 1', 'NOTA 2', 'MÉDIA', 'STATUS'])
+    for alunos in lista_alunos:
+        planilha.append([alunos['nome'], alunos['nota1'], alunos['nota2'], alunos['media'], alunos['aprovacao']])
