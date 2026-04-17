@@ -1,4 +1,9 @@
-from sistema.funcoes import *
+from sistema.estatisticas import *
+from sistema.organizacao import *
+from sistema.processamento import *
+from sistema.relatorio import *
+from sistema.saida import *
+from sistema.validacao import *
 
 lista_alunos = []
 
@@ -9,8 +14,8 @@ while True:
     2 - Listar alunos
     3 - Mostrar estatisticas
     4 - Gerar relatórios Excel
-    5 - Sair\n \n
-                    """))
+    0 - Sair\n
+-------->  """))
         
     except ValueError:
         print("Isso não é um número!")
@@ -20,14 +25,9 @@ while True:
         case 1:
             while True:   
                 nome = input("\nDigite o nome do aluno: ").title().strip()
-                if not nome:
-                    print("O nome não pode estar vazio!")
+                if not validar_nome(nome):
                     continue
-                if nome.replace(" ","").isalpha(): 
-                    break
-                else:
-                    print("Utilize apenas letras")
-                    
+                break
             while True:        
                 try:
                     nascimento = input("\nColoque a data de nascimento do aluno em formato dd/mm/aaaa: ")
@@ -36,15 +36,14 @@ while True:
                     print("A data de nascimento deve estar no formato dd/mm/aaaa")
                     continue 
 
-                if calcular_idade(nascimento):
+                if validar_idade(nascimento):
                     break
                 else:
                     print('A idade deve ser maior que 12 e menor que 18')
-                    continue  
-
+                    continue         
             
-            try:
-                while True:
+            while True:
+                try:
                     nota1 = float(input("\nDigite a primeira nota: ")) 
                     nota = nota1
                     if not validar_nota(nota):
@@ -52,7 +51,11 @@ while True:
                         continue
                     else:
                         break
-                while True:       
+                except ValueError:
+                    print("Digite apenas números.")
+                    continue
+            while True:  
+                try:     
                     nota2 = float(input("Digite a segunda nota: "))
                     nota = nota2
                     if not validar_nota(nota):
@@ -60,15 +63,15 @@ while True:
                         continue
                     else:
                         break
-            except ValueError:
-                print("Digite apenas números.")
-                continue
-            media = (nota1 + nota2) / 2
+                except ValueError:
+                    print("Digite apenas números")
+                    continue        
+ 
+            media = media_funcao(nota1, nota2)
             
-
             aprovacao = aprovar(media)
             cadastro = data_cadastro()
-            adicionar_aluno(nome,nascimento,idade,media,aprovacao,cadastro,lista_alunos)
+            adicionar_aluno(nome,nascimento,idade,nota1,nota2,media,aprovacao,cadastro,lista_alunos)
             print(f'\n Aluno {nome} cadastrado com sucesso!')
 
 
@@ -76,22 +79,14 @@ while True:
             listar_alunos(lista_alunos)
 
         case 3:
-            if lista_vazia(lista_alunos):
-                print(f'\nMédia da turma:{media_notas(lista_alunos):.2f}')
-
-                melhor = melhor_aluno(lista_alunos)
-                print(f"\nMelhor aluno: {melhor['nome']} ({melhor['media']})")
-                aprovados,reprovados = separar_aluno(lista_alunos)
-                print(f"\nAprovados:{aprovados}")
-                print(f"\nReprovados {reprovados}")
-
-            else:
-                print('Nenhum aluno(a) consta como cadastrado.')
-              
+            estatistica(lista_alunos)
         case 4:
-            
-            print('Função Excel ainda não consta.')
-        case 5:
+            if lista_vazia(lista_alunos):
+                salvar_excel(lista_alunos)
+                print("Alunos salvos")
+            else:
+                print("Nenhum aluno cadastrado")
+        case 0:
             print("\nFechando programa...\n")
             break
         case _:
